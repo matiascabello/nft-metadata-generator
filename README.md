@@ -4,13 +4,13 @@ The process of creating multiple NFTs and making them available for minting in O
 
 ## 1) Create images
 
-For testing purposes, this repository includes a script that automatically generates 20 plain-colored images at random.
+For testing purposes, this repository includes a [script](https://github.com/matiascabello/sublimart/tree/main/image-generator) that automatically generates 20 plain-colored images at random.
 
 ## 2) Upload images to ipfs
 
-The generated images must be uploaded to a storage bucket. In this case, NFT.Storage was used.
+The generated images must be uploaded to a storage bucket. In this case, [NFT.Storage](https://nft.storage/) was used.
 
-For a neat bulk upload process, we can use the NFT UP tool, which is provided and maintained by NFT.Storage.
+For a neat bulk upload process, we can use the [NFTUp](https://nft.storage/docs/how-to/nftup/) tool, which is provided and maintained by NFT.Storage.https://nft.storage/
 
 Once all the images are successfully uploaded, copy the CID of the newly created directory in NFT.Storage.
 
@@ -18,7 +18,7 @@ Once all the images are successfully uploaded, copy the CID of the newly created
 
 NFT metadata files store all the data related to tokens: name, description, image, attributes, etc.
 
-For testing purposes, this repository includes a script to bulk create the metadata files for the images generated in step 1.
+For testing purposes, this repository includes a [script](https://github.com/matiascabello/sublimart/tree/main/metadata-generator) to bulk create the metadata files for the images generated in step 1.
 
 Replace the `json` properties values with the appropriate ones, especially the CID of the directory that stores the images.
 

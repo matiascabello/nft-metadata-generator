@@ -33,7 +33,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 // Generate 20 random color PNG images
-for (let i = 0; i < 20; i++) {
+for (let i = 1; i <= 20; i++) {
   const outputPath = `${outputDir}/${i}.png`;
   generateRandomColorPNG(outputPath, canvasWidth, canvasHeight);
   console.log(`Image ${i} generated and saved to: ${outputPath}`);

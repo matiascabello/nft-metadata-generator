@@ -1,7 +1,7 @@
 {
-  "name": "image-generator",
+  "name": "sublimart",
   "version": "1.0.0",
-  "description": "",
+  "description": "The process of creating multiple NFTs and making them available for minting in OpenSea consists of four steps.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
