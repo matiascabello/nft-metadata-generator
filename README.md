@@ -22,8 +22,8 @@ For testing purposes, this repository includes a [script](https://github.com/mat
 
 Replace the `json` properties values with the appropriate ones, especially the CID of the directory that stores the images.
 
-`json.name = "TOKEN_NAME" + i;`
-`json.description = "TOKEN_DESCRIPTION" + i;`
+`json.name = "TOKEN_NAME" + i;`  
+`json.description = "TOKEN_DESCRIPTION" + i;`  
 `json.image = "ipfs://REPLACE_WITH_CID/" + i + ".png";`
 
 
