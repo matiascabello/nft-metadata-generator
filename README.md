@@ -10,7 +10,7 @@ For testing purposes, this repository includes a [script](https://github.com/mat
 
 The generated images must be uploaded to a storage bucket. In this case, [NFT.Storage](https://nft.storage/) was used.
 
-For a neat bulk upload process, we can use the [NFTUp](https://nft.storage/docs/how-to/nftup/) tool, which is provided and maintained by NFT.Storage.https://nft.storage/
+For a neat bulk upload process, we can use the [NFTUp](https://nft.storage/docs/how-to/nftup/) tool, which is provided and maintained by NFT.Storage.
 
 Once all the images are successfully uploaded, copy the CID of the newly created directory in NFT.Storage.
 
