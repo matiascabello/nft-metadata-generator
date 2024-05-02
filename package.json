@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "canvas": "^2.11.2"
+    "canvas": "^2.11.2",
+    "color-namer": "^1.4.0",
+    "csv-parser": "^3.0.0"
   }
 }
