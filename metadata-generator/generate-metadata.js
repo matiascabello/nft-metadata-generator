@@ -87,6 +87,12 @@ fs.createReadStream(csvFilePath)
     delete row['bgcolor__003'];
     
 
+    // Create generated-metadata directory if it does not exist.
+
+    if (!fs.existsSync(outputDir)){
+      fs.mkdirSync(outputDir);
+    }
+
     // Build json file with rows and traits array.
 
     const json = JSON.stringify({...row, traits});
