@@ -54,9 +54,11 @@ Generated JSON example:
 
 ```json
 {
-    "name":"Test Name #1",
-    "description":"Test Description",
-    "image":"ipfs://bafybeifjvaqfaw62pvtmsctognkawvxjsdaiemelqf4quvdgoinsfwbw7q/5-82.png","external_url":"https://www.sublim.art/artwork/lo-abierto@flo_giovanni_pacini","traits":  [
+    "name":"Lo Abierto #1",
+    "description":"Florencia Giovanni Pacini is an Argentinian artist whose work has been exhibited in several national galleries. Merging both neo-romanticism and magical realism, she describes her work as figurative, poetic, narrative and dramatic, as well as being driven by feminism and ecology.",
+    "image":"ipfs://bafybeifjvaqfaw62pvtmsctognkawvxjsdaiemelqf4quvdgoinsfwbw7q/5-82.png",
+    "external_url":"https://www.sublim.art/artwork/lo-abierto@flo_giovanni_pacini",
+    "traits":  [
         {"trait_type":"Burn date","value":"2022-09-16"},
         {"trait_type":"Burn location","value":"Buenos Aires"},
         {"trait_type":"Curves","value":"14"},
@@ -71,7 +73,7 @@ Generated JSON example:
 
 #### Clarifications on JSON Data Construction
 
-1. `name` and `description` fields in the CSV file directly map to `name` and `description` in the JSON output.
+1. `name`, `description` and `external_url` fields in the CSV file directly map to `name`, `description` and `external URL` in the JSON output.
 
 2. `image` is constructed by appending the `file_name` string to the `ipfs` constant passed as an argument.
 
