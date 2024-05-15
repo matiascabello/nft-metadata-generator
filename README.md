@@ -1,40 +1,84 @@
-# Create multiple NFTs
+# NFT Metadata JSON Generator 0.1
 
-The process of creating multiple NFTs and making them available for minting in OpenSea consists of four steps.
+NFT Metadata JSON Generator takes a CSV file with the metadata of an NFT Collection and creates a JSON file for each item with the specifications required by NFT Marketplaces such as OpenSea.
 
-## 1) Create images
+## Considerations for version 0.1
 
-For testing purposes, this repository includes a [script](https://github.com/matiascabello/sublimart/tree/main/image-generator) that automatically generates 20 plain-colored images at random.
+The first version of NFT Metadata JSON Generator was tailored taking into consideration the specifications of the [Sublimart NFT Collection](https://opensea.io/collection/sublimart-buenos-aires-1). Consider it a PoC that may evolve into a more flexible software, suitable for the needs of most NFT projects.
 
-## 2) Upload images to ipfs
+## Usage
 
-The generated images must be uploaded to a storage bucket. In this case, [NFT.Storage](https://nft.storage/) was used.
+To run the program, clone the repository, navigate to `/metadata-generator`, and execute the following command:
 
-For a neat bulk upload process, we can use the [NFTUp](https://nft.storage/docs/how-to/nftup/) tool, which is provided and maintained by NFT.Storage.
+```bash
+node generate-metadata --input <PATH_TO_CSV> --ipfs <IPFS_BASE_URL>
+```
 
-Once all the images are successfully uploaded, copy the CID of the newly created directory in NFT.Storage.
+The command takes two arguments:
 
-## 3) Create NFT metadata files
+- `input`: path to the csv file with your metadata.
+- `ipfs`: base URL of the images directory.
 
-NFT metadata files store all the data related to tokens: name, description, image, attributes, etc.
+### CSV File
 
-For testing purposes, this repository includes a [script](https://github.com/matiascabello/sublimart/tree/main/metadata-generator) to bulk create the metadata files for the images generated in step 1.
+In this case the csv file should include the following columns:
 
-Replace the `json` properties values with the appropriate ones, especially the CID of the directory that stores the images.
+- name
+- description
+- image (file name)
+- external URL
+- attributes[artist]
+- attributes[burn_date]
+- attributes[burn_location]
+- attributes[technique]
+- attributes[curves]
+- width
+- heigh
+- id
+- cnt
+- ligh_x
+- bgcolor__001
+- bgcolor__002
+- bgcolor__003
 
-`json.name = "TOKEN_NAME" + i;`  
-`json.description = "TOKEN_DESCRIPTION" + i;`  
-`json.image = "ipfs://REPLACE_WITH_CID/" + i + ".png";`
+### IPFS URL
+
+Before generating the set of JSON files, all item images should have been uploaded to IPFS or any other decentralized storage platform, as the program requires the URL of the directory with all the images. E.g: `ipfs://bafybeifgk4maoi7b436httwca643uq2u6yhoenc3o7yj4jsfbuatbontga/`
+
+### Output
+
+All generated JSON files are stored inside the `generated-metadata` directory.
+
+Generated JSON example:
 
 
-## 4) Upload metadata files to ipfs
+```json
+{
+    "name":"Test Name #1",
+    "description":"Test Description",
+    "image":"ipfs://bafybeifjvaqfaw62pvtmsctognkawvxjsdaiemelqf4quvdgoinsfwbw7q/5-82.png","external_url":"https://www.sublim.art/artwork/lo-abierto@flo_giovanni_pacini","traits":  [
+        {"trait_type":"Burn date","value":"2022-09-16"},
+        {"trait_type":"Burn location","value":"Buenos Aires"},
+        {"trait_type":"Curves","value":"14"},
+        {"trait_type":"Technique","value":"Oil on canvas"},
+        {"trait_type":"Artist","value":"Flo Giovanni Pacini"},
+        {"trait_type":"Shadow","value":"Left"},
+        {"trait_type":"Background color","value":"dimgray"},
+        {"trait_type":"Width","value":"8.5"}
+    ]
+}
+```
 
-Similarly to step 2, bulk upload the generated metadata files to NFT.Storage using NFT UP. Copy the CID/IPFS URL as you will need it to complete the following step.
+#### Clarifications on JSON Data Construction
 
+1. `name` and `description` fields in the CSV file directly map to `name` and `description` in the JSON output.
 
+2. `image` is constructed by appending the `file_name` string to the `ipfs` constant passed as an argument.
 
-## 5) Update baseURI in the collection's smart contract
+3. The array of `traits` represents the atttributes of the item.
 
-In order to make the NFT smart contract get the correct information, we must call the `setBaseURI` method in the token contract. This can be done by interacting directly with the smart contract through the blockchain explorer. Notice that only the owner of the contract can call the `setBaseURI` method.
+4. `Burn date`, `Burn location`, `Curves`, `Technique`, and `Artist` values are directly taken from their respective fields in the CSV file.
 
-Pass the `IPFS` URL as the newBaseURI parameter required by `setBaseURI`. Make sure to add a slash (/) at the end of the URL. For example: `ipfs://bafybeifv5swwz6wzdbj7dzfhnimis34elblloxhelk26pt6ataxpftfg5a/`
+5. `Shadow` is calculated taking the `light_x` field, representing the direction of the projected shadow.
+
+6. `Background color` is derived from `bgcolor__001`, `bgcolor__002`, `bgcolor__003` values, which together form an RGB color code. This code is then translated into a more friendly color name using the `color-namer` library.

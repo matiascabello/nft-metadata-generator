@@ -1,12 +1,23 @@
 const fs = require('fs')
 const csv = require('csv-parser')
 const colorNamer = require('color-namer')
+const { program } = require('commander');
 
-const ipfsURL = 'ipfs://bafybeifjvaqfaw62pvtmsctognkawvxjsdaiemelqf4quvdgoinsfwbw7q/';
+program
+  .option('--input <file>', 'Input file')
+  .option('--ipfs <url>', 'IPFS Url')
+  .parse(process.argv);
 
+const options = program.opts();
+
+if (!options.input || !options.ipfs) {
+  console.error('Both --input and --ipfs options are required.');
+  process.exit(1);
+}
+
+const ipfsURL = options.ipfs;
+const csvFilePath = options.input;
 const outputDir = "generated-metadata"
-
-const csvFilePath = 'metadata.csv'
 
 let fileNumber = 1
 
